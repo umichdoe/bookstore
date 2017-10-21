@@ -15,6 +15,7 @@ app.get('/', function(req, res) {
   res.send('please use /api/books or /api/genres');
 })
 
+/* ==== GENRES ===== */
 // GET all genres
 app.get('/api/genres', function(req, res) {
   Genre.getGenres(function(err, genres) {
@@ -48,7 +49,18 @@ app.put('/api/genres/:_id', function(req, res) {
   });
 })
 
+app.delete('/api/genres/:_id', function(req, res) {
+  var id = req.params._id;
+  Genre.deleteGenre(id, function(err, genre) {
+    if(err){
+      throw err;
+    }
+    res.json(genre);
+  })
 
+})
+
+/* ==== BOOKS ===== */
 // Get all books
 app.get('/api/books', function(req, res) {
   Book.getBooks(function(err, books) {
@@ -70,7 +82,7 @@ app.post('/api/books', function(req, res) {
   })
 })
 
-//Get book by Id 36:27
+//Get book by Id 
 app.get('/api/books/:_id', function(req, res) {
   Book.getBookById(req.params._id, function(err, book) {
     if(err){
