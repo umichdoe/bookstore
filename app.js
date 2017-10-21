@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const Genre = require('./models/genre');
 const Book = require('./models/book');
 
+app.use(bodyParser.json());
+
 //connect to Mongoose
 mongoose.connect('mongodb://localhost/fakebookstore', { useMongoClient: true });
 var db = mongoose.connection
@@ -23,6 +25,18 @@ app.get('/api/genres', function(req, res) {
   });
 })
 
+// Add a genre
+app.post('/api/genres', function(req, res) {
+  var genre = req.body;
+  Genre.addGenre(genre, function(err, genre) {
+    if(err){
+      throw err;
+    }
+    res.json(genre);
+  });
+})
+
+
 // Get all books
 app.get('/api/books', function(req, res) {
   Book.getBooks(function(err, books) {
@@ -31,6 +45,17 @@ app.get('/api/books', function(req, res) {
     }
     res.json(books);
   });
+})
+
+// Post add a book
+app.post('/api/books', function(req, res) {
+  var book = req.body;
+  Book.addBook(book, function(err, book) {
+    if(err){
+      throw err;
+    }
+    res.json(book);
+  })
 })
 
 //Get book by Id 36:27
