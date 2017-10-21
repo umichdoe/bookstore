@@ -13,7 +13,6 @@ var GenreSchema = new Schema({
 });
 
 var Genre = mongoose.model('Genre', GenreSchema);
-
 module.exports = Genre;
 
 // get Genres
