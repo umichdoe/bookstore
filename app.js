@@ -34,15 +34,14 @@ app.get('/api/books', function(req, res) {
 })
 
 //Get book by Id 36:27
-app.get('/api/books/:id', function(req, res) {
-  Book.getBooks(function(err, books) {
+app.get('/api/books/:_id', function(req, res) {
+  Book.getBookById(req.params._id, function(err, book) {
     if(err){
       throw err;
     }
-    res.json(books);
+    res.json(book);
   });
 })
-
 
 var port = process.env.PORT || 3456;
 
