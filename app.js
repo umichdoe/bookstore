@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 //connect to Mongoose
-mongoose.connect('mongodb://localhost/fakeBookstore');
+mongoose.connect('mongodb://localhost/fakeBookstore', { useMongoClient: true });
 var db = mongoose.connection
 
 app.get('/', function(req, res) {
